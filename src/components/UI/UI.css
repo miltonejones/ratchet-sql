@@ -1,4 +1,4 @@
-body { 
+body {
   --font-family: Lato, Roboto, Ariel;
 
   --card-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px,
@@ -18,7 +18,7 @@ body {
   --back-color-error: rgb(253, 237, 237);
   --back-color-warning: rgb(255, 244, 229);
   --back-color-success: rgb(237, 247, 237);
- 
+
   --color-control-back-primary: #27a;
   --color-control-back-secondary: rebeccapurple;
   --color-control-back-success: rgb(30, 70, 32);
@@ -36,8 +36,6 @@ body {
 
 .ui,
 .ui-text {
-  background-color: var(--back-color);
-  color: var(--fore-color);
   border-color: var(--border-color);
   border-width: var(--border-width);
   border-style: var(--border-style);
@@ -46,7 +44,8 @@ body {
 }
 
 .ui-control {
-  background-color: var(--control-back-color); 
+  color: var(--fore-color);
+  background-color: var(--control-back-color);
 }
 
 .ui-size {
@@ -56,6 +55,7 @@ body {
 }
 
 .ui-text {
+  background-color: var(--back-color);
   color: var(--text-color);
   font-family: var(--font-family);
 }
@@ -268,7 +268,8 @@ body {
 
 /* card/paper
 --------------------------------------------------------------------------------------- */
-.card, .paper {
+.card,
+.paper {
   font-family: var(--font-family);
   background-color: white;
   padding: 12px;

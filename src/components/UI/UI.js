@@ -1,5 +1,5 @@
-import React from "react";
-import "./UI.css";
+import React from 'react';
+import './UI.css';
 import {
   convertProps,
   css,
@@ -8,10 +8,17 @@ import {
   THEME_SPACING,
   useInspector,
   useCollapse,
-} from "./Themer";
-import useComponentState from "./hooks/useComponentState";
-import usePagination from "./hooks/usePagination";
-import { AlertCircle, CheckCircle, AlertTriangle, Info,ChevronLeft,ChevronRight } from "../../icons";
+} from './Themer';
+import useComponentState from './hooks/useComponentState';
+import usePagination from './hooks/usePagination';
+import {
+  AlertCircle,
+  CheckCircle,
+  AlertTriangle,
+  Info,
+  ChevronLeft,
+  ChevronRight,
+} from '../../icons';
 
 /****************************************************************************************************
  *                                          RACHET UI
@@ -21,7 +28,7 @@ import { AlertCircle, CheckCircle, AlertTriangle, Info,ChevronLeft,ChevronRight 
 /****************************************************************************************************
  *                                            Alert
  ****************************************************************************************************/
-export function Alert({ children, severity = "info", icon: Photo, ...props }) {
+export function Alert({ children, severity = 'info', icon: Photo, ...props }) {
   const icons = {
     info: Info,
     success: CheckCircle,
@@ -29,10 +36,10 @@ export function Alert({ children, severity = "info", icon: Photo, ...props }) {
     error: AlertCircle,
   };
   const filters = {
-    info: "invert(0.5) sepia(1) saturate(5) hue-rotate(175deg)",
-    success: "invert(0.5) sepia(.4) saturate(5) hue-rotate(75deg)",
-    warning: "invert(0.5) sepia(.8) saturate(5) hue-rotate(15deg)",
-    error: "invert(0.2) sepia(.7) saturate(12) hue-rotate(0deg)",
+    info: 'invert(0.5) sepia(1) saturate(5) hue-rotate(175deg)',
+    success: 'invert(0.5) sepia(.4) saturate(5) hue-rotate(75deg)',
+    warning: 'invert(0.5) sepia(.8) saturate(5) hue-rotate(15deg)',
+    error: 'invert(0.2) sepia(.7) saturate(12) hue-rotate(0deg)',
   };
   const Icon = Photo || icons[severity];
   const filter = filters[severity];
@@ -41,8 +48,8 @@ export function Alert({ children, severity = "info", icon: Photo, ...props }) {
       <Box
         style={{
           ...convertProps(props),
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
         }}
         {...props}
         className="alert"
@@ -57,7 +64,7 @@ export function Alert({ children, severity = "info", icon: Photo, ...props }) {
 /****************************************************************************************************
  *                                           AppBar
  ****************************************************************************************************/
-export function AppBar({ children,   ...props }) { 
+export function AppBar({ children, ...props }) {
   return (
     <Flex align="center" className="ui ui-control app-bar" {...props}>
       {children}
@@ -68,7 +75,7 @@ export function AppBar({ children,   ...props }) {
 /****************************************************************************************************
  *                                           Avatar
  ****************************************************************************************************/
-export function Avatar({ children, src, alt, variant = "circle", ...props }) {
+export function Avatar({ children, src, alt, variant = 'circle', ...props }) {
   const image = <img src={src} alt={alt} />;
   return (
     <Center className="ui ui-size avatar" variant={variant} {...props}>
@@ -97,7 +104,7 @@ export function Button({ children, onClick, ...props }) {
     <Iw {...props}>
       <Center
         {...props}
-        className="ui button"
+        className="ui ui-control button"
         style={{ ...convertProps(props) }}
         onClick={(e) => !props.disabled && onClick && onClick(e)}
       >
@@ -125,11 +132,7 @@ export function Box({ children, ...props }) {
 export function Card({ children, ...props }) {
   return (
     <Iw {...props}>
-      <fieldset
-        {...props}
-        className="card"
-        style={  convertProps(props) }
-      >
+      <fieldset {...props} className="card" style={convertProps(props)}>
         {children}
       </fieldset>
     </Iw>
@@ -171,7 +174,10 @@ export function Collapse({
   ...props
 }) {
   const { ref, style } = useCollapse(height, on);
-  const styleName = css({ collapse: 1, on, [className]: 1, noscroll }, props.className);
+  const styleName = css(
+    { collapse: 1, on, [className]: 1, noscroll },
+    props.className
+  );
   return (
     <Iw {...props}>
       <Cw ref={ref} style={style}>
@@ -190,8 +196,8 @@ export function Dialog({
   children,
   open,
   onClose,
-  width = "400px",
-  height = "200px",
+  width = '400px',
+  height = '200px',
   ...props
 }) {
   return (
@@ -221,39 +227,34 @@ export function Flex({
   justify: justifyContent,
   align: alignItems,
   xs,
-  spacing = 0, 
+  spacing = 0,
   wrap,
   column,
   children,
   ...props
 }) {
   const width = !!xs ? `${(xs / 12) * 100}%` : null;
-  const flexWrap = wrap ? "wrap" : "nowrap";
-  const margin = spacing * THEME_SPACING + "px";
-  const flexDirection = column ? "column" : "row";
+  const flexWrap = wrap ? 'wrap' : 'nowrap';
+  const margin = spacing * THEME_SPACING + 'px';
+  const flexDirection = column ? 'column' : 'row';
   const styles = {
-    display: "flex",
+    display: 'flex',
     flexDirection,
     justifyContent,
     alignItems,
     width,
     margin,
-    flexWrap, 
+    flexWrap,
     ...convertProps(props),
   };
 
-  const classes = {"ui-text": 1, flex: 1};
-  // TODO: handle added classes in the css function 
- 
+  const classes = { ui: 1, flex: 1 };
+  // TODO: handle added classes in the css function
 
   return (
     <Iw {...props} width={width}>
-     {/* [[ {css(classes, props.className)}]] */}
-      <div
-        className={css(classes, props.className)}
-        {...props}
-        style={styles}
-      >
+      {/* [[ {css(classes, props.className)}]] */}
+      <div className={css(classes, props.className)} {...props} style={styles}>
         {children}
       </div>
     </Iw>
@@ -301,7 +302,7 @@ export function Grid({ columns, children, ...props }) {
  * IconButton
  * a circle with an onClick event...whew that's a toughie
  ****************************************************************************************************/
-export function IconButton({ children, onClick, size = "medium", ...props }) {
+export function IconButton({ children, onClick, size = 'medium', ...props }) {
   return (
     <Flex
       onClick={(e) => !props.disabled && onClick && onClick(e)}
@@ -323,7 +324,7 @@ export function IconButton({ children, onClick, size = "medium", ...props }) {
 export function Inspector({ children, ...props }) {
   const { open, setOpen, shown, ref, stats, style } = useInspector();
   const onClose = () => setOpen(!1);
-  const dialogProps = { onClose, open, width: "400px", height: "500px" };
+  const dialogProps = { onClose, open, width: '400px', height: '500px' };
   return (
     <>
       <Cw {...props} style={style} className="inspector" ref={ref}>
@@ -369,8 +370,8 @@ export function Menu({ options = [], onChange, button }) {
   const { offsetHeight: menuHeight } = box.current ?? {};
   const { offsetLeft: x, offsetTop: y, offsetHeight: h } = ref.current ?? {};
   const onClick = () =>
-    !!ref.current && setCoords({ left: x + "px", top: y + h + "px" });
-  const style = { "--menu-content-height": menuHeight + "px" };
+    !!ref.current && setCoords({ left: x + 'px', top: y + h + 'px' });
+  const style = { '--menu-content-height': menuHeight + 'px' };
   return (
     <>
       <Backdrop open={!!coords} onClose={() => setCoords(null)} />
@@ -400,15 +401,15 @@ export function Menu({ options = [], onChange, button }) {
 }
 
 /****************************************************************************************************
- * Paper 
+ * Paper
  ****************************************************************************************************/
- export function Paper({ children, ...props }) {
+export function Paper({ children, ...props }) {
   return (
     <Iw {...props}>
       <fieldset
         {...props}
         className={css({ paper: 1 }, props.className)}
-        style={  convertProps(props) }
+        style={convertProps(props)}
       >
         {children}
       </fieldset>
@@ -416,30 +417,25 @@ export function Menu({ options = [], onChange, button }) {
   );
 }
 
-export function Pagination({click, ...props}) {
-  const {
-    page, 
-    setState, 
-    startPage, 
-    last, 
-    pageText, 
-    descText
-  } = usePagination(props);
-  return <Iw {...props}>
-    <Flex className="pagination">
-      <div onClick={() => setState((s) => ({ page: !s.page }))}>
-        {page ? pageText : descText}
-      </div>
-      <IconButton disabled={startPage < 1} click={() => click(-1)}>
+export function Pagination({ click, ...props }) {
+  const { page, setState, startPage, last, pageText, descText } =
+    usePagination(props);
+  return (
+    <Iw {...props}>
+      <Flex className="pagination">
+        <div onClick={() => setState((s) => ({ page: !s.page }))}>
+          {page ? pageText : descText}
+        </div>
+        <IconButton disabled={startPage < 1} click={() => click(-1)}>
           <ChevronLeft />
-      </IconButton>
-      <IconButton disabled={last} click={() => click(1)}>
+        </IconButton>
+        <IconButton disabled={last} click={() => click(1)}>
           <ChevronLeft />
-      </IconButton>
-    </Flex>
-  </Iw>
+        </IconButton>
+      </Flex>
+    </Iw>
+  );
 }
-
 
 /****************************************************************************************************
  *                                            Select
@@ -463,14 +459,16 @@ export function Select({ options = [], value, label, ...props }) {
 export const Snackbar = ({
   children,
   open,
-  where = "sw",
+  where = 'sw',
   onClose,
   ...props
 }) => {
   return (
     <Iw {...props}>
       <Backdrop open={open} onClose={onClose} />
-      <Box className={css({ snackbar: 1, open, [where]: 1 }, props.className)}>{children}</Box>
+      <Box className={css({ snackbar: 1, open, [where]: 1 }, props.className)}>
+        {children}
+      </Box>
     </Iw>
   );
 };
@@ -507,7 +505,7 @@ export function Switch({ onChange, ...props }) {
     <Iw {...props} variant="filled">
       <div
         onClick={() => onChange && !props.disabled && onChange(!props.checked)}
-        className="switch"
+        className="ui switch"
         style={convertProps(props)}
         {...props}
       >
@@ -530,9 +528,9 @@ export function TextBox({
   rows = 3,
   ...props
 }) {
-  const width = fullWidth ? "100%" : "inherit";
+  const width = fullWidth ? '100%' : 'inherit';
   const args = {
-    className: "ui-base text-box",
+    className: 'ui-base text-box',
     rows,
     value,
     style: { width, ...style, ...convertProps(props) },
@@ -547,13 +545,16 @@ export function TextBox({
 /****************************************************************************************************
  *                                          Typography
  ****************************************************************************************************/
-export function Typography({ variant = "body1", children, ...props }) {
+export function Typography({ variant = 'body1', children, ...props }) {
   return (
     <Iw {...props}>
       <div
         style={convertProps(props)}
         {...props}
-        className={css({ typo: 1, [variant]: 1, [props.className]: 1 }, props.className)}
+        className={css(
+          { typo: 1, [variant]: 1, [props.className]: 1 },
+          props.className
+        )}
       >
         {children}
       </div>
@@ -575,10 +576,10 @@ function Iw({ inspect, children, ...props }) {
  * InspectorBody (internal)
  ****************************************************************************************************/
 function InspectorBody({ name, styles }) {
-  const [filterText, setFilterText] = React.useState("");
+  const [filterText, setFilterText] = React.useState('');
   return (
     <>
-      {" "}
+      {' '}
       <Box className="inspector-stat-box">
         {!!styles && (
           <List
