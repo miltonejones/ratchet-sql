@@ -1,3 +1,98 @@
-h1, p {
-  font-family: Lato;
+body {
+  overflow: hidden;
+  margin: 0;
+  --font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --margin-offset: 48px;
+  font-family: var(--font-family);
+}
+
+.App {
+  font-family: var(--font-family);
+  height: 100vh;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-min-width);
+  height: calc(100vh - var(--margin-offset));
+  overflow: hidden;
+  transition: width 0.4s ease-in-out;
+}
+
+.workpane {
+  overflow: auto;
+  height: calc(100vh - var(--margin-offset) - 44px);
+}
+
+.workpane.lower {
+  height: calc(100vh - var(--margin-offset) - 176px);
+}
+
+.worksize {
+  transition: width 0.4s ease-in-out;
+  width: calc(100vw - var(--sidebar-width) - 32px);
+}
+
+h1,
+p {
+  font-family: var(--font-family);
+}
+.no-wrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.selected {
+  /* border-right: solid 1px rgba(0, 0, 0, 0.1);
+  border-left: solid 1px rgba(0, 0, 0, 0.1); */
+  background-color: var(--hilite-color);
+}
+
+.li {
+  padding: 8px;
+  margin: 1px 0;
+  cursor: pointer;
+}
+
+.li:not(.selected):hover {
+  background-color: aliceblue;
+  text-decoration: underline;
+}
+
+.li.red:hover {
+  background-color: var(--back-color-error);
+  text-decoration: underline;
+}
+
+.dense .li {
+  padding: 2px 8px;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.debug {
+  outline: dotted 2px blueviolet;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  color: var(--color-primary);
+}
+
+.red {
+  color: var(--color-error);
+}
+
+.well {
+  background-color: rgba(80, 80, 80, 0.1);
+  border-radius: 8px;
+  padding: 24px;
 }
