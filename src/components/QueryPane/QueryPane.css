@@ -1,0 +1,9 @@
+.snap .x {
+  visibility: hidden;
+  margin: 0 4px;
+  cursor: pointer;
+}
+.snap:hover .x {
+  visibility: visible;
+  color: var(--color-success);
+}
